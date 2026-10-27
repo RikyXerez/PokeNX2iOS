@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key><string>PokeNX2iOS</string>
+	<key>CFBundleDisplayName</key><string>PokeNX2iOS</string>
+	<key>CFBundleIdentifier</key><string>com.pokenx2ios.app</string>
+	<key>CFBundleExecutable</key><string>PokeNX2iOS</string>
+	<key>CFBundlePackageType</key><string>APPL</string>
+	<key>CFBundleShortVersionString</key><string>1.0</string>
+	<key>CFBundleVersion</key><string>1</string>
+	<key>CFBundleIconFile</key><string>AppIcon</string>
+	<key>LSMinimumSystemVersion</key><string>14.0</string>
+	<key>LSApplicationCategoryType</key><string>public.app-category.developer-tools</string>
+	<key>NSHighResolutionCapable</key><true/>
+	<key>NSAppleEventsUsageDescription</key><string>PokeNX2iOS abre Terminal para instalar las herramientas que faltan.</string>
+	<key>CFBundleDevelopmentRegion</key><string>es</string>
+</dict>
+</plist>

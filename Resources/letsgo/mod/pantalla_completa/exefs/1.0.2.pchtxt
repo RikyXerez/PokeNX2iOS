@@ -1,0 +1,37 @@
+@nsobid-C208DB6A4EF4361F28B8402BE0F7CD9A
+
+# Pokemon Let's Go Pikachu v1.0.2 - full screen on any iPhone, adapted from the 21:9 Ultrawide mod (Fl4sh_#9174)
+# The game still renders a 16:9 image with the 3D view squeezed for the screen's aspect; the app stretches it to the whole screen (flags.txt: stretch).
+# Every camera aspect is read from a slot in the padding after the read-only segment (main+0x1526200, unused: the segment's content ends at 0x152617c).
+# The slot holds 2.1727 (0x400b0df7, 2868x1320) here; the host's loader replaces that value in the mod's data runs with the screen's own aspect
+# (DM_SCREEN_ASPECT, which the iOS app measures at launch), so one build fits every screen.
+
+@flag offset_shift 0x100
+
+@enabled
+// the aspect slot (float) and the camera constructor's {fov 30°, aspect} pair
+01526200 f70d0b40
+01526208 920a063f
+0152620c f70d0b40
+// camera parameter table aspect at [x19+0x404] (main+0xb1e3c4): cbz / ldr s2,[x20,x8] → adrp x8 + ldr s2 from the slot
+00b1e3c0 48500090
+00b1e3c4 020142bd
+// area cameras whose table carries an aspect (stored to the camera parameters' +0xd4): cbz / ldr s0,[x8,x9] → adrp x9 + ldr s0 from the slot
+00b17eb8 695000f0
+00b17ebc 200142bd
+// scripted cameras: the aspect argument of main+0xb18cd0 (fmov s6,w24 at its only caller) → a branch to a stub in the padding after a ret at main+0x252814
+// that loads s6 from the slot and goes on to the call
+00251b20 3d030014
+00252814 b0960090
+00252818 060242bd
+0025281c c2fcff17
+// camera constructor: movk x10 pair (fov 30° low, 16:9 high) → adrp x8 + ldr x10 of the {fov, aspect} pair
+00652678 a8760090
+0065267c 0a0541f9
+// parameter block init ([x19+0x34] = 16:9): mov / movk w8 → adrp x8 + ldr w8 from the slot
+007ebf04 c86900f0
+007ebf08 080142b9
+// the projection builder (main+0x1209c8: tan(fov/2) × aspect) read the 16:9 constant at 0xf46f80 → the slot
+001209c4 28a000d0
+001209c8 020142bd
+@stop

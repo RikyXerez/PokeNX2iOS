@@ -1,0 +1,7 @@
+dist/
+.build/
+.swiftpm/
+.DS_Store
+*.ipa
+*.nsp
+*.keys
