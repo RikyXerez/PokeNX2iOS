@@ -32,12 +32,15 @@ if [ -n "${REFRESH_LETSGO:-}" ]; then
 fi
 
 echo "Compilando la app…"
-swift build -c release --package-path "$HERE"
-BIN="$(swift build -c release --package-path "$HERE" --show-bin-path)/PokeNX2iOS"
+# the build folder's path (it holds the user name) is mapped away so it is not written into the executable
+SWIFT_FLAGS=(-c release --package-path "$HERE" -Xswiftc -file-prefix-map -Xswiftc "$HERE=.")
+swift build "${SWIFT_FLAGS[@]}"
+BIN="$(swift build "${SWIFT_FLAGS[@]}" --show-bin-path)/PokeNX2iOS"
 
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN" "$APP/Contents/MacOS/PokeNX2iOS"
+strip -S -x "$APP/Contents/MacOS/PokeNX2iOS"   # debug map entries name the object files by their full path
 cp "$HERE/Resources/Info.plist" "$APP/Contents/Info.plist"
 [ -f "$HERE/Resources/AppIcon.icns" ] && cp "$HERE/Resources/AppIcon.icns" "$APP/Contents/Resources/"
 cp -R "$HERE/Resources/letsgo" "$APP/Contents/Resources/letsgo"
@@ -47,6 +50,12 @@ echo "Empaquetando el motor nxnative $BRANCH ($COMMIT)…"
 # Progress notes of other ports are left out (personal notes, not needed to build).
 git -C "$NXNATIVE" archive --format=tar "$COMMIT" -- . ":(exclude)docs/*-progress.md" | gzip -6 > "$APP/Contents/Resources/engine.tar.gz"
 echo "$COMMIT" > "$APP/Contents/Resources/engine.version"
+
+# nothing in the app may name this Mac's user (home folder path or user name)
+ME="$(id -un)"
+if grep -rqaiF -e "$HOME" -e "$ME" "$APP" || tar -xzOf "$APP/Contents/Resources/engine.tar.gz" | grep -qaiF -e "$HOME" -e "$ME"; then
+    echo "Error: la app contiene $HOME o el usuario $ME" >&2; exit 1
+fi
 
 codesign --force --deep --sign - "$APP"
 echo "Listo: $APP ($(du -sh "$APP" | cut -f1))"
