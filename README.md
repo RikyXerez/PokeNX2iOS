@@ -12,6 +12,10 @@ Esta herramienta no sustituye a NXnative, sino que lo usa como motor. Empaqueta 
 
 PokeNX2iOS no tiene relación con Nintendo, The Pokémon Company ni Game Freak.
 
+## Apoyar el proyecto
+
+Si la herramienta te ha servido y quieres que siga añadiendo soporte a otros juegos de Pokémon, puedes invitarme a un café en [Ko-fi](https://ko-fi.com/rikyxerez). También hay un botón en la propia app.
+
 ## Qué pide
 
 1. El **juego base** en NSP (`010003F003A34000`, v0).
@@ -61,7 +65,3 @@ Ejecuta `scripts/build_ipa_from_nsp.py` de NXnative con `--progress json` y mues
 build_ipa_from_nsp.py input -k prod.keys -p v131072 -l es --bundle-id … -o PokemonLetsGoPikachu.ipa \
     --profile-out input/010003F003A34000_build/profile --progress json
 ```
-
-## Apoyar el proyecto
-
-Si la herramienta te ha servido, puedes invitarme a un café en [Ko-fi](https://ko-fi.com/rikyxerez). También hay un botón en la propia app.
