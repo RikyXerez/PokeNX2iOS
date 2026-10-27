@@ -1,6 +1,6 @@
 # PokeNX2iOS
 
-App de macOS que genera la IPA de **Pokémon: Let's Go, Pikachu!** para iPhone y iPad con todas las mejoras del proyecto NXnative. No lleva ningún archivo del juego: cada persona importa los suyos, sacados de su consola.
+Herramienta para macOS que genera la IPA de **Pokémon: Let's Go, Pikachu!** para iPhone y iPad con todas las mejoras del proyecto NXnative. No lleva ningún archivo del juego: cada persona importa los suyos, sacados de su consola.
 
 ## Basado en NXnative
 
