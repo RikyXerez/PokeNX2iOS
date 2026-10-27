@@ -1,5 +1,7 @@
 # PokeNX2iOS
 
+[![Apóyame en Ko-fi](https://img.shields.io/badge/Ko--fi-Ap%C3%B3yame-FF5E5B?logo=ko-fi&logoColor=white)](https://ko-fi.com/rikyxerez)
+
 Herramienta para macOS que genera la IPA de **Pokémon: Let's Go, Pikachu!** para iPhone y iPad con todas las mejoras del proyecto NXnative. No lleva ningún archivo del juego: cada persona importa los suyos, sacados de su consola.
 
 ## Basado en NXnative
@@ -59,3 +61,7 @@ Ejecuta `scripts/build_ipa_from_nsp.py` de NXnative con `--progress json` y mues
 build_ipa_from_nsp.py input -k prod.keys -p v131072 -l es --bundle-id … -o PokemonLetsGoPikachu.ipa \
     --profile-out input/010003F003A34000_build/profile --progress json
 ```
+
+## Apoyar el proyecto
+
+Si la herramienta te ha servido, puedes invitarme a un café en [Ko-fi](https://ko-fi.com/rikyxerez). También hay un botón en la propia app.

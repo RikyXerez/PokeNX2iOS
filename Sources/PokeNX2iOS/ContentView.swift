@@ -20,7 +20,13 @@ struct ContentView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("PokeNX2iOS").font(.largeTitle.bold())
+            HStack {
+                Text("PokeNX2iOS").font(.largeTitle.bold())
+                Spacer()
+                Link(destination: Game.kofiURL) { Label("Apoyar en Ko-fi", systemImage: "cup.and.saucer.fill") }
+                    .buttonStyle(.bordered)
+                    .help(Game.kofiURL.absoluteString)
+            }
             Text("Genera la IPA de \(Game.name) para iPhone y iPad con todas las mejoras de NXnative: pantalla completa adaptada a cualquier pantalla (también al iPhone Duo), combates salvajes, controles táctiles, soporte multilenguaje y las correcciones del motor.")
                 .foregroundStyle(.secondary)
             Text("La herramienta no incluye ningún archivo del juego. Necesitas tus propios archivos: el juego base en NSP, el update \(Game.updateDisplay) en NSP y tu prod.keys, sacados de tu consola.")
@@ -204,7 +210,10 @@ struct Section4Build: View {
                         .buttonStyle(.borderedProminent)
                         .disabled(!b.canBuild)
                 }
-                if case .done = b.phase { Button("Mostrar en Finder") { b.revealIPA() } }
+                if case .done = b.phase {
+                    Button("Mostrar en Finder") { b.revealIPA() }
+                    Link("¿Te ha servido? Apoya en Ko-fi", destination: Game.kofiURL)
+                }
                 if b.workDir != nil, b.phase != .idle { Button("Abrir registros") { b.revealLogs() } }
                 Spacer()
                 Text("Motor NXnative \(Bundled.engineVersion.prefix(12))").font(.caption.monospaced()).foregroundStyle(.secondary)

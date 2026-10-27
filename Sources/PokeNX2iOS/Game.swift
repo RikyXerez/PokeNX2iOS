@@ -11,6 +11,8 @@ enum Game {
     static let package = "v131072"
     static let defaultBundleID = "com.pokenx2ios.pokemonletsgo"
     static let defaultIPAName = "PokemonLetsGoPikachu.ipa"
+    /// Donations to the author of this tool.
+    static let kofiURL = URL(string: "https://ko-fi.com/rikyxerez")!
 
     /// The languages the game ships (as the NSP script lists them).
     static let languages: [(code: String, label: String)] = [
